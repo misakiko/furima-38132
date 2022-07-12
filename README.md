@@ -18,7 +18,6 @@
 has_many :items
 has_many :purchases
 
-
 ## itemsテーブル
 |Column       |Type      |Options                       |
 |-------------|----------|------------------------------|
