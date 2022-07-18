@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user! expect[:index]
   def index
     @items = Item.all
   end
@@ -6,8 +7,8 @@ class ItemsController < ApplicationController
     @items = Item.new
   end
 
- private
- def item_params
-  params.require(:item).permit(:image).merge(user_id: current_user.id)
-end
+  private
+    def item_params
+    params.require(:item).permit(:image).merge(user_id: current_user.id)
+    end
 end
