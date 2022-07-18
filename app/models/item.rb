@@ -1,4 +1,11 @@
 class Item < ApplicationRecord
+ extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to_active_hash :category
+  belongs_to_active_hash :situation
+  belongs_to_active_hash :price_bear
+  belongs_to_active_hash :area
+  belongs_to_active_hash :days
+
   belongs_to :user
   has_one :purchase
 
