@@ -5,6 +5,8 @@ class PriceBear < ActiveHash::Base
     { id: 3, name: '送料込み(出品者負担)' },
   ]
 
+  validates :price_bear_id, presence: true
+  
   include ActiveHash::Associations
   has_many :items
 

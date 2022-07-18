@@ -9,6 +9,7 @@ class Situation < ActiveHash::Base
     { id: 7, name: '全体的に状態が悪い' },
    ]
 
+   validates :situation_id, presence: true
 
   include ActiveHash::Associations
   has_many :items

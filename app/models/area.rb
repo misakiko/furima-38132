@@ -19,6 +19,8 @@ class Area < ActiveHash::Base
   ]
 
 
+  validates :area_id, presences: true
+
   include ActiveHash::Associations
   has_many :items
 
