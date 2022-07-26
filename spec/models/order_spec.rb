@@ -1,14 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe Order, type: :model do
-  before do
-    @order = FactoryBot.build(:order)
-  end
-
   describe '商品購入' do
+    before do
+      user = FactoryBot.create(:user)
+      item = FactoryBot.create(:item)
+      @order = FactoryBot.build(:order, user_id: user.id, item_id: item.id)
+    end
     context '内容に問題ない場合' do
+      it 'すべての値が正しく入力されていれば保存できること' do
+        expect(@order).to be_valid
+      end
+
       it 'buildingが空でも保存できる' do
-        @order.building = nil
+        @order.building = ''
         expect(@order).to be_valid
       end
     end
@@ -51,25 +56,25 @@ RSpec.describe Order, type: :model do
       end
 
       it 'post_cordは半角文字列以外だと登録できない' do
-        @order.phone_number = 'ABC'
+        @order.post_cord = 'ABC'
         @order.valid?
         expect(@order.errors.full_messages).to include("Post cord is invalid")
       end
 
       it 'post_cordは7桁以上だと登録できない' do
-        @order.phone_number = '12345678'
+        @order.post_cord = '12345678'
         @order.valid?
         expect(@order.errors.full_messages).to include("Post cord is invalid")
       end
 
       it 'post_cordは7桁以下だと登録できない' do
-        @order.phone_number = '123456'
+        @order.post_cord = '123456'
         @order.valid?
         expect(@order.errors.full_messages).to include("Post cord is invalid")
       end
       
       it 'post_cordはハイフンなしだと登録できない' do
-        @order.phone_number = '1234567'
+        @order.post_cord = '1234567'
         @order.valid?
         expect(@order.errors.full_messages).to include("Post cord is invalid")
       end
