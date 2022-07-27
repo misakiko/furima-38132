@@ -73,7 +73,7 @@ RSpec.describe Order, type: :model do
         expect(@order.errors.full_messages).to include('Post cord is invalid')
       end
 
-      it 'post_cordはハイフンなしだと登録できない' do
+      it 'post_cordは半角ハイフンを含む形でなければ購入できない' do
         @order.post_cord = '1234567'
         @order.valid?
         expect(@order.errors.full_messages).to include('Post cord is invalid')
@@ -85,17 +85,31 @@ RSpec.describe Order, type: :model do
         expect(@order.errors.full_messages).to include('Phone number is invalid')
       end
 
-      it 'phone_numberは10桁以内では登録できない' do
+      it 'phone_numberは9桁以下では登録できない' do
         @order.phone_number = '12345678'
         @order.valid?
         expect(@order.errors.full_messages).to include('Phone number is invalid')
       end
 
-      it 'phone_numberは11桁以上では登録できない' do
+      it 'phone_numberは12桁以上では登録できない' do
         @order.phone_number = '000000000000'
         @order.valid?
         expect(@order.errors.full_messages).to include('Phone number is invalid')
       end
+
+      it 'userが紐づいていなければ登録できない' do
+        @order.user_id = nil
+        @order.valid?
+        expect(@order.errors.full_messages).to include("User can't be blank")
+      end
+
+      it 'itemが紐づいていなければ登録できない' do
+        @order.item_id = nil
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Item can't be blank")
+      end
+
+
     end
   end
 end

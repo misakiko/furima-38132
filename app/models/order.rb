@@ -11,6 +11,8 @@ class Order
   validates :token, presence: true
 
   validates :area_id, numericality: { other_than: 0, message: "can't be blank" }
+  validates :user_id, presence: true
+  validates :item_id, presence: true
 
   def save
     purchase = Purchase.create(user_id: user_id, item_id: item_id)
