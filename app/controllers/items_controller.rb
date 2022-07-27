@@ -56,8 +56,6 @@ class ItemsController < ApplicationController
   end
 
   def purchase_user
-    if @item.purchase.present?
-      redirect_to root_path
-    end
+    redirect_to root_path if @item.purchase.present?
   end
 end
