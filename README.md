@@ -49,7 +49,7 @@ has_one :address
 |Column        |Type      |Options                        |
 |--------------|----------|------------------------------ |
 |post_cord     |string    |null: false                    |
-|area_id       |string    |null: false                    |
+|area_id       |integer   |null: false                    |
 |city          |string    |null: false                    |
 |block_number  |string    |null: false                    |
 |building      |string    |                               |
